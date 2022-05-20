@@ -1,3 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Limelight&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sora&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .paginate-card {
+    @apply border border-white flex justify-center items-center h-8 w-8 text-white hover:text-red-600 hover:border-red-600;
+  }
+}
+
 html,
 body {
   padding: 0;
@@ -13,4 +26,67 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.layer {
+  -webkit-mask-image: linear-gradient(#000, transparent);
+  mask-image: linear-gradient(#000, transparent);
+}
+
+.layer-right {
+  -webkit-mask-image: linear-gradient(to right, white, transparent);
+  mask-image: linear-gradient(to right, white, transparent);
+}
+
+.blur-layer-right {
+  -webkit-mask-image: linear-gradient(to right, black, transparent);
+  mask-image: linear-gradient(to right, black, transparent);
+  filter: blur(0.5px);
+  -webkit-filter: blur(0.5px);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  padding: 1;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(60, 60, 60);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(162, 160, 160);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(197, 29, 29);
+}
+
+.border-track::-webkit-scrollbar-track {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.review-content {
+  display: -webkit-box;
+  max-width: 300px;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-box-pack: center;
+  text-overflow: ellipsis;
+}
+
+.review-content-1 {
+  display: -webkit-box;
+  max-width: 300px;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-box-pack: center;
+  text-overflow: ellipsis;
 }
