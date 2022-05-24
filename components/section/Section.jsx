@@ -4,7 +4,7 @@ import FilmItem from "../filmItem/FilmItem";
 const Section = ({ section, data }) => {
   return (
     <div className="text-white">
-      <p className="text-2xl lg:text-3xl py-4 font-sora uppercase">{section}</p>
+      <p className="text-xl lg:text-3xl py-4 font-sora uppercase">{section}</p>
 
       <Swiper
         slidesPerView="auto"
@@ -15,7 +15,10 @@ const Section = ({ section, data }) => {
       >
         {data.map((item, index) => {
           return (
-            <SwiperSlide key={index} className="!w-[200px]">
+            <SwiperSlide
+              key={index}
+              className="!w-[150px] md:!w-[150px] lg:!w-[180px] xl:!w-[200px]"
+            >
               <FilmItem item={item} mediaType={item.media_type} />
             </SwiperSlide>
           );

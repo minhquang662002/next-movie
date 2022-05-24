@@ -34,7 +34,7 @@ const FilmItem = ({ item, mediaType }) => {
         )}
       </div>
       <Link href={`/${item.media_type}/${item.id}`}>
-        <p className="font-bold cursor-pointer hover:text-red-600 transition-colors">
+        <p className="text-xs lg:text-base font-bold cursor-pointer hover:text-red-600 transition-colors">
           {item.title || item.name || item.filmName}
         </p>
       </Link>

@@ -7,7 +7,7 @@ const Comment = ({ item }) => {
       <div className="bg-gray-800 rounded-lg p-4">
         <div className="flex gap-x-2 items-center">
           <div
-            className="bg-center bg-cover w-10 h-10 rounded-full border border-gray-600"
+            className="bg-center bg-cover w-10 h-10 rounded-full border border-gray-600 shrink-0"
             style={{ backgroundImage: `url(${item?.photoURL})` }}
           />
           <div className="text-sm">

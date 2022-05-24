@@ -9,43 +9,45 @@ const watch = (props) => {
   const { id, similiar, filmData } = props;
   const { user } = useContext(GlobalContext);
   const videoRef = useRef();
-  console.log(videoRef, videoRef.current);
+
   return (
     <>
       <Head>
         <title>{filmData.title}</title>
       </Head>
       <div className="p-10">
-        <div className="flex gap-x-10 font-sora">
+        <div className="lg:flex gap-x-10 font-sora">
           <div className="flex flex-col flex-grow">
             <iframe
               ref={videoRef}
               allowFullScreen
               src={`https://www.2embed.ru/embed/tmdb/movie?id=${id}`}
-              className="w-full h-full"
+              className="w-full lg:h-full"
             />
             <div className="my-4">
-              <h1 className="font-sans text-3xl">{filmData.title}</h1>
-              <i>{filmData.tagline}</i>
+              <h1 className="font-sans text-xl lg:text-3xl">
+                {filmData.title}
+              </h1>
+              <i className="text-xs lg:text-base">{filmData.tagline}</i>
               <div className="flex gap-x-1">
                 {filmData.genres.map((item) => (
                   <span
-                    className="mt-2 mb-4 text-sm px-2 py-1 text-center whitespace-nowrap border border-white rounded-full"
+                    className="mt-2 mb-4 text-xs lg:text-sm px-2 py-1 text-center whitespace-nowrap border border-white rounded-full"
                     key={item.id}
                   >
                     {item.name}
                   </span>
                 ))}
               </div>
-              <p>{filmData.overview}</p>
+              <p className="text-sm lg:text-base">{filmData.overview}</p>
             </div>
           </div>
 
-          <div className="w-1/4 shrink-0">
+          <div className="lg:w-1/4 lg:shrink-0">
             <MovieSideBar similiar={similiar} />
           </div>
         </div>
-        {/* <CommentSection user={user} id={id} media_type="movie" /> */}
+        <CommentSection user={user} id={id} media_type="movie" />
       </div>
     </>
   );

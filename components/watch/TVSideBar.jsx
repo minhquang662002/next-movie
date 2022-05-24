@@ -43,7 +43,7 @@ const TVSideBar = ({ seasonsList, ep, season, id }) => {
                 />
                 <div className="overflow-hidden">
                   <Image
-                    className="shrink-0 rounded-lg group-hover:scale-125 transition"
+                    className="shrink-0  rounded-lg group-hover:scale-125 transition"
                     src={TMDB_imageResize("w500", item.poster_path)}
                     width={100}
                     height={150}
@@ -57,8 +57,10 @@ const TVSideBar = ({ seasonsList, ep, season, id }) => {
                       : "group-hover:text-red-600"
                   }`}
                 >
-                  <p className="font-bold text-lg">{item.name}</p>
-                  <p className="text-sm">{item.episodes.length} episodes</p>
+                  <p className="font-bold text-sm md:text-lg">{item.name}</p>
+                  <p className="text-xs md:text-sm">
+                    {item.episodes.length} episodes
+                  </p>
                 </div>
               </div>
               <div

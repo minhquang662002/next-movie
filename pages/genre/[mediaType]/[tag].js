@@ -25,7 +25,10 @@ const GenrePage = (props) => {
             <FilmItem item={item} key={index} mediaType={mediaType} />
           ))}
         </div>
-        <Pagination totalPage={filmList.total_pages} />
+        <Pagination
+          totalPage={filmList.total_pages}
+          url={`/genre/${mediaType}/${tag}`}
+        />
       </div>
     </>
   );

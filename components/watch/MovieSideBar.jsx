@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { TMDB_imageResize } from "../../utils/constant";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const MovieSideBar = ({ similiar }) => {
-  return (
-    <>
-      <p className="uppercase font-bold">similar movie</p>
+  let pc_ver = (
+    <div className="hidden lg:block">
+      <p className="uppercase font-bold">similar movies</p>
       <div className="flex flex-col max-h-132 overflow-y-scroll">
         {similiar.results.map((item) => {
           return (
@@ -14,7 +15,7 @@ const MovieSideBar = ({ similiar }) => {
                 <div>
                   <Image
                     className="rounded-lg"
-                    src={TMDB_imageResize("original", item.poster_path)}
+                    src={TMDB_imageResize("w500", item.poster_path)}
                     width={100}
                     height={150}
                   />
@@ -25,6 +26,44 @@ const MovieSideBar = ({ similiar }) => {
           );
         })}
       </div>
+    </div>
+  );
+
+  let mb_ver = (
+    <div className="block lg:hidden">
+      <p className="uppercase font-bold my-2">similar movies</p>
+      <Swiper
+        slidesPerView="auto"
+        loop={true}
+        spaceBetween={15}
+        slidesPerGroupAuto
+        className="text-center w-full"
+      >
+        {similiar.results.map((item) => {
+          return (
+            <SwiperSlide key={item.id} className="!w-[100px]">
+              <Link href={`/movie/${item.id}`}>
+                <div>
+                  <Image
+                    className="rounded-lg"
+                    src={TMDB_imageResize("w500", item.poster_path)}
+                    width={100}
+                    height={150}
+                  />
+                </div>
+              </Link>
+              <p className="text-xs">{item.title}</p>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </div>
+  );
+
+  return (
+    <>
+      {pc_ver}
+      {mb_ver}
     </>
   );
 };

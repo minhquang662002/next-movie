@@ -12,7 +12,7 @@ const Review = ({ item }) => {
     <div className="flex flex-col text-sm rounded-lg bg-gray-900 p-4 mt-10">
       <div className="flex gap-x-4 items-center">
         <div
-          className="rounded-full w-12 h-12 bg-cover bg-center border border-white shrink-0"
+          className="rounded-full h-8 w-8 md:w-12 md:h-12 lg:w-12 lg:h-12 bg-cover bg-center border border-white shrink-0"
           style={{
             backgroundImage: `url(${
               !item.author_details.avatar_path.includes("https")
@@ -23,7 +23,6 @@ const Review = ({ item }) => {
         />
         <div className="w-full">
           <p className="font-bold">{item.author}</p>
-
           <p className="text-xs">{dayjs(item.created_at).fromNow()}</p>
         </div>
       </div>

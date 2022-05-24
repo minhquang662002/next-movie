@@ -19,20 +19,20 @@ const watch = (props) => {
         <title>{filmData.name}</title>
       </Head>
       <div className="p-10">
-        <div className="flex gap-x-10 font-sora">
+        <div className="block md:flex lg:flex gap-x-10 font-sora">
           <div className="flex flex-grow flex-col">
             <iframe
               allowFullScreen
               src={`https://www.2embed.ru/embed/tmdb/tv?id=${id}&s=${season}&e=${ep}`}
-              className="h-120 w-full"
+              className="max-h-96 lg:h-120 w-full"
             />
             <div className="my-4">
               <h1 className="font-sans text-3xl">{filmData.name}</h1>
               <i className="">{filmData.tagline}</i>
-              <div className="flex gap-x-1">
+              <div className="flex gap-2 flex-wrap my-2">
                 {filmData.genres.map((item, index) => (
                   <span
-                    className="mt-2 mb-4 text-sm px-2 py-1 text-center whitespace-nowrap border border-white rounded-full"
+                    className="text-sm px-2 py-1 text-center whitespace-nowrap border border-white rounded-full"
                     key={index}
                   >
                     {item.name}
@@ -42,14 +42,14 @@ const watch = (props) => {
               <p>
                 {seasonsList
                   .filter((item) => item.season_number == season)
-                  .map((info) => (
-                    <span>{info.overview}</span>
+                  .map((info, index) => (
+                    <span key={index}>{info.overview}</span>
                   ))}
               </p>
             </div>
           </div>
 
-          <div className="w-1/4 shrink-0">
+          <div className="md:w-1/4 lg:w-1/4 shrink-0 w-full">
             <TVSideBar
               seasonsList={seasonsList}
               ep={ep}

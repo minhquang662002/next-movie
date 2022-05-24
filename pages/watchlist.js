@@ -20,9 +20,9 @@ const WatchList = () => {
       <Head>
         <title>Watchlist</title>
       </Head>
-      <div className="max-w-[1450px] mx-auto py-4">
+      <div className="py-4  px-4 md:px-10">
         <p className="font-sans text-3xl mb-8">Watchlist</p>
-        <div className="grid grid-cols-6 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 text-center">
           {data?.[0]?.watchlist?.map((item) => (
             <FIlmItem item={item} mediaType={item.media_type} />
           ))}

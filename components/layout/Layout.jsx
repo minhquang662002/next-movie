@@ -1,14 +1,12 @@
 import Navbar from "../navbar/Navbar";
-import { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
+import Footer from "../footer/Footer";
 
 const Layout = ({ children }) => {
-  const { setUser } = useContext(GlobalContext);
-
   return (
-    <div className="bg-black min-h-screen text-white">
+    <div className="bg-black min-h-screen text-white flex flex-col">
       <Navbar />
-      {children}
+      <div className="flex-grow">{children}</div>
+      <Footer />
     </div>
   );
 };

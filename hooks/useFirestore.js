@@ -4,7 +4,6 @@ import { db } from "../firebaseConfig";
 
 export const useFirestore = (inputCollection, condition) => {
   const [documents, setDocuments] = useState([]);
-  console.log("running");
   useEffect(() => {
     let docRef = collection(db, inputCollection);
 

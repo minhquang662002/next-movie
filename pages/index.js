@@ -26,7 +26,7 @@ export default function Home(props) {
 
       <Carousel carouselData={carouselData} />
 
-      <div className="max-w-[1450px] mx-auto">
+      <div className="max-w-[200px] md:max-w-[650px] lg:max-w-[980px] xl:max-w-[1250px] mx-auto">
         {Object.keys(combinedData)
           .slice(0, 2)
           .map((item, index) => (

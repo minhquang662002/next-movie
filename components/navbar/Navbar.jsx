@@ -15,10 +15,10 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`flex items-center justify-between fixed top-0 z-10 w-full bg-black lg:h-12 lg:px-4 lg:text-lg text-xs`}
+        className={`flex items-center justify-between fixed top-0 z-10 w-full bg-black text-xs px-2 py-1 lg:h-12 lg:px-4 lg:text-lg `}
       >
         <Link href="/">
-          <h1 className="text-white font-bold lg:text-2xl text-lg hover:text-red-600 transition-colors cursor-pointer">
+          <h1 className="text-white font-bold text-sm lg:text-2xl hover:text-red-600 transition-colors cursor-pointer">
             UniMovie
           </h1>
         </Link>
@@ -41,7 +41,7 @@ const Navbar = () => {
             } transition-colors cursor-pointer`}
           >
             Movies
-            <div className="hidden group-hover:block absolute min-w-[500px] -left-44 top-6">
+            <div className="hidden lg:hidden lg:group-hover:block absolute min-w-[500px] -left-44 top-6">
               {<GenresTable mediaType="movie" />}
             </div>
           </li>
@@ -59,22 +59,22 @@ const Navbar = () => {
             </div>
           </li>
         </ul>
-        <div className="flex gap-x-4 items-center">
+        <div className="flex gap-x-2 lg:gap-x-4 items-center">
           <Link href="/search">
-            <SearchIcon className="text-white h-5 w-5 cursor-pointer hover:text-red-600 transition-colors" />
+            <SearchIcon className="text-white w-4 h-4 lg:h-5 lg:w-5 cursor-pointer hover:text-red-600 transition-colors" />
           </Link>
           {user && (
             <Link href="/watchlist">
-              <CollectionIcon className="text-white h-5 w-5 cursor-pointer hover:text-red-600 transition-colors" />
+              <CollectionIcon className="text-white w-4 h-4 lg:h-5 lg:w-5 cursor-pointer hover:text-red-600 transition-colors" />
             </Link>
           )}
           {user ? (
-            <div className="flex items-center text-sm gap-x-2 font-bold font-sora">
-              <span className="bg-gray-800 py-1 px-2 rounded-full">
+            <div className="flex items-center lg:text-sm gap-x-2 font-bold font-sora">
+              <span className="hidden lg:block bg-gray-800 lg:py-1 lg:px-2 rounded-full">
                 {user.displayName}
               </span>
               <div
-                className="bg-white w-8 h-8 rounded-full bg-cover bg-center border border-gray-white relative"
+                className="bg-white w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-cover bg-center border border-gray-white relative"
                 style={{ backgroundImage: `url(${user.photoURL})` }}
                 onClick={() => setShowSettings((state) => !state)}
               >
@@ -88,7 +88,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      <div className="lg:h-12" />
+      <div className="h-8 md:h-12 lg:h-12" />
     </>
   );
 };

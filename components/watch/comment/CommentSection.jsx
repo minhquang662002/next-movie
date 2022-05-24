@@ -35,7 +35,7 @@ const CommentSection = ({ media_type, user, id }) => {
         )}
         <div className="flex gap-x-2 my-10">
           <div
-            className="w-12 h-12 rounded-full border border-white bg-center bg-cover"
+            className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white bg-center bg-cover shrink-0"
             style={{ backgroundImage: `url(${user?.photoURL})` }}
           />
           <textarea

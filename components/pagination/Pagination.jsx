@@ -1,10 +1,10 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-const Pagination = ({ totalPage }) => {
+const Pagination = ({ totalPage, url, cont }) => {
   const {
-    query: { mediaType, tag, page },
+    query: { page },
   } = useRouter();
   const total = new Array(totalPage > 500 ? 500 : totalPage)
     .fill("")
@@ -14,17 +14,22 @@ const Pagination = ({ totalPage }) => {
     if (total.length - page > 8)
       middle = (
         <>
-          <Link href={`/genre/${mediaType}/${tag}?page=${1}`}>
+          <Link href={`${url}${cont ? "&" : "?"}page=${1}`}>
             <div className="paginate-card cursor-pointer">1</div>
           </Link>
-          <Link href={`/genre/${mediaType}/${tag}?page=${2}`}>
+          <Link href={`${url}${cont ? "&" : "?"}page=${2}`}>
             <div className="paginate-card cursor-pointer">2</div>
           </Link>
           <div className="paginate-card">...</div>
           {total
             .slice(Number(page) - 3, Number(page) + 4)
             .map((item, index) => (
-              <Link href={`/genre/${mediaType}/${tag}?page=${item}`} key={item}>
+              <Link
+                href={`/genre/${mediaType}/${tag}${
+                  cont ? "&" : "?"
+                }page=${item}`}
+                key={item}
+              >
                 <div
                   className={`paginate-card ${
                     item == page
@@ -38,12 +43,12 @@ const Pagination = ({ totalPage }) => {
               </Link>
             ))}
           <div className="paginate-card">...</div>
-          <Link href={`/genre/${mediaType}/${tag}?page=${total.length - 1}`}>
+          <Link href={`${url}${cont ? "&" : "?"}page=${total.length - 1}`}>
             <div className="paginate-card cursor-pointer">
               {total.length - 1}
             </div>
           </Link>
-          <Link href={`/genre/${mediaType}/${tag}?page=${total.length}`}>
+          <Link href={`${url}${cont ? "&" : "?"}page=${total.length}`}>
             <div className="paginate-card cursor-pointer">{total.length}</div>
           </Link>
         </>
@@ -51,15 +56,15 @@ const Pagination = ({ totalPage }) => {
     else {
       middle = (
         <>
-          <Link href={`/genre/${mediaType}/${tag}?page=${1}`}>
+          <Link href={`${url}${cont ? "&" : "?"}page=${1}`}>
             <div className="paginate-card cursor-pointer">1</div>
           </Link>
-          <Link href={`/genre/${mediaType}/${tag}?page=${2}`}>
+          <Link href={`${url}${cont ? "&" : "?"}page=${2}`}>
             <div className="paginate-card cursor-pointer">2</div>
           </Link>
           <div className="paginate-card">...</div>
           {total.slice(total.length - 10, total.length).map((item, index) => (
-            <Link href={`/genre/${mediaType}/${tag}?page=${item}`} key={item}>
+            <Link href={`${url}${cont ? "&" : "?"}page=${item}`} key={item}>
               <div
                 className={`paginate-card ${
                   item == page
@@ -80,7 +85,7 @@ const Pagination = ({ totalPage }) => {
       <>
         {total.slice(0, 10).map((item) => {
           return (
-            <Link href={`/genre/${mediaType}/${tag}?page=${item}`} key={item}>
+            <Link href={`${url}${cont ? "&" : "?"}page=${item}`} key={item}>
               <div
                 className={`paginate-card ${
                   item == page
@@ -94,10 +99,10 @@ const Pagination = ({ totalPage }) => {
           );
         })}
         <div className="paginate-card">...</div>
-        <Link href={`/genre/${mediaType}/${tag}?page=${total.length - 1}`}>
+        <Link href={`${url}${cont ? "&" : "?"}page=${total.length - 1}`}>
           <div className="paginate-card cursor-pointer">{total.length - 1}</div>
         </Link>
-        <Link href={`/genre/${mediaType}/${tag}?page=${total.length}`}>
+        <Link href={`${url}${cont ? "&" : "?"}page=${total.length}`}>
           <div className="paginate-card cursor-pointer">{total.length}</div>
         </Link>
       </>
@@ -105,23 +110,27 @@ const Pagination = ({ totalPage }) => {
   }
 
   return (
-    <div className="flex justify-center gap-x-2 mt-8">
-      {page > 1 && (
-        <Link href={`/genre/${mediaType}/${tag}?page=${Number(page) - 1}`}>
-          <div className="paginate-card cursor-pointer hover:text-red-600 hover:border-red-600">
-            <ChevronLeftIcon className="h-4 w-4" />
-          </div>
-        </Link>
+    <>
+      {totalPage && (
+        <div className="flex justify-center gap-x-2 mt-8">
+          {page > 1 && (
+            <Link href={`${url}?page=${Number(page) - 1}`}>
+              <div className="paginate-card cursor-pointer hover:text-red-600 hover:border-red-600">
+                <ChevronLeftIcon className="h-4 w-4" />
+              </div>
+            </Link>
+          )}
+          {middle}
+          {page < total.length && (
+            <Link href={`${url}?page=${Number(page) + 1}`}>
+              <div className="paginate-card cursor-pointer hover:text-red-600 hover:border-red-600">
+                <ChevronRightIcon className="h-4 w-4" />
+              </div>
+            </Link>
+          )}
+        </div>
       )}
-      {middle}
-      {page < total.length && (
-        <Link href={`/genre/${mediaType}/${tag}?page=${Number(page) + 1}`}>
-          <div className="paginate-card cursor-pointer hover:text-red-600 hover:border-red-600">
-            <ChevronRightIcon className="h-4 w-4" />
-          </div>
-        </Link>
-      )}
-    </div>
+    </>
   );
 };
 
