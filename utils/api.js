@@ -119,14 +119,6 @@ export const signUp = async (e, formValue, router) => {
         "https://res.cloudinary.com/dt7azkk7b/image/upload/v1651391736/next-movie/o8zox9wx0pc5pycbqplz.jpg",
     });
 
-    await setDoc(doc(db, "users", res.user.uid), {
-      uid: res.user.uid,
-      email,
-      username,
-      createdAt: new Date().toISOString(),
-      photoURL:
-        "https://res.cloudinary.com/dt7azkk7b/image/upload/v1651391736/next-movie/o8zox9wx0pc5pycbqplz.jpg",
-    });
     router.push("/");
   } catch (error) {
     alert(error);

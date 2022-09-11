@@ -21,7 +21,7 @@ const watch = (props) => {
             <iframe
               ref={videoRef}
               allowFullScreen
-              src={`https://www.2embed.ru/embed/tmdb/movie?id=${id}`}
+              src={`https://www.2embed.to/embed/tmdb/movie?id=${id}`}
               className="w-full lg:h-full"
             />
             <div className="my-4">

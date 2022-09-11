@@ -23,7 +23,7 @@ const watch = (props) => {
           <div className="flex flex-grow flex-col">
             <iframe
               allowFullScreen
-              src={`https://www.2embed.ru/embed/tmdb/tv?id=${id}&s=${season}&e=${ep}`}
+              src={`https://www.2embed.to/embed/tmdb/tv?id=${id}&s=${season}&e=${ep}`}
               className="max-h-96 lg:h-120 w-full"
             />
             <div className="my-4">
