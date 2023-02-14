@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import FilmItem from "../filmItem/FilmItem";
+import FilmItem from "./FilmItem";
 
 const Section = ({ section, data }) => {
   return (

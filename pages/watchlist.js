@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import Head from "next/head";
-import FIlmItem from "../components/filmItem/FilmItem";
+import FilmItem from "../components/FilmItem";
 import { useState, useEffect } from "react";
 import { getDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig";
@@ -40,7 +40,7 @@ const WatchList = () => {
         <p className="font-sans text-3xl mb-8">Favorites</p>
         <div className="grid grid-cols-2 md:grid-cols-7 text-center">
           {items.map((item) => (
-            <FIlmItem key={item?.id} item={item} mediaType={item.media_type} />
+            <FilmItem key={item?.id} item={item} mediaType={item.media_type} />
           ))}
         </div>
       </div>

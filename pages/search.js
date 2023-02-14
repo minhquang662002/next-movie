@@ -1,7 +1,6 @@
 import Head from "next/head";
-import { useState } from "react";
 import { basicSearch } from "../utils/api";
-import FilmItem from "../components/filmItem/FilmItem";
+import FilmItem from "../components/FilmItem";
 import { useRouter } from "next/router";
 import Pagination from "../components/pagination/Pagination";
 import { useRef } from "react";

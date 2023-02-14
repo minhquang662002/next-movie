@@ -1,7 +1,7 @@
 import { getFilmByGenre } from "../../../utils/api";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import FilmItem from "../../../components/filmItem/FilmItem";
+import FilmItem from "../../../components/FilmItem";
 import Pagination from "../../../components/pagination/Pagination";
 import { getGenreName } from "../../../utils/constant";
 
@@ -27,7 +27,7 @@ const GenrePage = (props) => {
         </div>
         <Pagination
           totalPage={filmList.total_pages}
-          url={`/genre/${mediaType}/${tag}`}
+          url={(page) => `/genre/${mediaType}/${tag}?page=${page}`}
         />
       </div>
     </>

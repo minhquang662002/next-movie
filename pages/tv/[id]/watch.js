@@ -19,7 +19,7 @@ const watch = (props) => {
         <title>{filmData.name}</title>
       </Head>
       <div className="p-10">
-        <div className="block md:flex lg:flex gap-x-10 font-sora">
+        <div className="block md:flex lg:flex gap-x-10 font-sora md:h-[700px]">
           <div className="flex flex-grow flex-col">
             <iframe
               allowFullScreen

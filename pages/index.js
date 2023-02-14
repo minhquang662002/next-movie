@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Carousel from "../components/Carousel";
-import Section from "../components/section/Section";
+import Section from "../components/Section";
 import TrendingSection from "../components/trending/TrendingSection";
 import { getHomePage } from "../utils/api";
 

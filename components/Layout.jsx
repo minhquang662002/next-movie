@@ -1,5 +1,5 @@
-import Navbar from "../navbar/Navbar";
-import Footer from "../footer/Footer";
+import Navbar from "./navbar/Navbar";
+import Footer from "./Footer";
 import { ToastContainer } from "react-toastify";
 const Layout = ({ children }) => {
   return (

@@ -1,10 +1,10 @@
-import { TMDB_imageResize } from "../../utils/constant";
+import { TMDB_imageResize } from "../utils/constant";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { XCircleIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import { addToList, removeAddedItems } from "../../utils/api";
+import { addToList } from "../utils/api";
 
 const FilmItem = ({ item, mediaType }) => {
   const [loaded, setLoaded] = useState(false);

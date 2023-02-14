@@ -1,4 +1,4 @@
-import { TMDB_imageResize } from "../../utils/constant";
+import { TMDB_imageResize } from "../utils/constant";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Linkify from "react-linkify";

@@ -4,7 +4,7 @@ import "swiper/css";
 import nProgress from "nprogress";
 import Router from "next/router";
 import { ContextProvider } from "../context/GlobalContext";
-import Layout from "../components/layout/Layout";
+import Layout from "../components/Layout";
 
 Router.events.on("routeChangeStart", nProgress.start);
 Router.events.on("routeChangeError", nProgress.done);

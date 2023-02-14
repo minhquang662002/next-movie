@@ -78,7 +78,7 @@ const CommentSection = ({ media_type, user, id }) => {
 
   return (
     <div className="my-4">
-      <h2 className="text-2xl font-bold my-4">Comments</h2>
+      <h2 className="text-2xl font-bold my-8">Comments</h2>
       {body}
     </div>
   );

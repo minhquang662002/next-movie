@@ -39,9 +39,11 @@ const Navbar = () => {
                 ? "text-red-600"
                 : "hover:text-red-600"
             } transition-colors cursor-pointer`}
-            onClick={() => router.push("/movies")}
           >
             Movies
+            <div className="hidden group-hover:block absolute min-w-[500px] -left-44 top-6 bg-red-600">
+              <GenresTable mediaType="movie" />
+            </div>
           </li>
 
           <li
@@ -50,12 +52,11 @@ const Navbar = () => {
                 ? "text-red-600"
                 : "hover:text-red-600"
             } transition-colors cursor-pointer`}
-            onClick={() => router.push("/tvs")}
           >
             TV Shows
-            {/* <div className="hidden group-hover:block absolute min-w-[500px] -left-44 top-6 bg-red-600">
+            <div className="hidden group-hover:block absolute min-w-[500px] -left-44 top-6 bg-red-600">
               <GenresTable mediaType="tv" />
-            </div> */}
+            </div>
           </li>
         </ul>
         <div className="flex gap-x-2 lg:gap-x-4 items-center">
