@@ -1,12 +1,16 @@
 import Head from "next/head";
 import { TMDB_imageResize } from "../../../utils/constant";
-import { StarIcon, PlayIcon, PlusCircleIcon } from "@heroicons/react/outline";
+import { StarIcon, PlayIcon, HeartIcon } from "@heroicons/react/outline";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getFilmDetail, getReviews, addToList } from "../../../utils/api";
 import Review from "../../../components/review/Review";
+import { useState, useEffect, useContext } from "react";
+import { GlobalContext } from "../../../context/GlobalContext";
+import { db } from "../../../firebaseConfig";
+import { onSnapshot, doc } from "firebase/firestore";
 
 const MoviePage = (props) => {
   const {
@@ -17,6 +21,17 @@ const MoviePage = (props) => {
     return new Date(b.created_at) - new Date(a.created_at);
   });
   const router = useRouter();
+  const [added, setAdded] = useState(false);
+  const { user } = useContext(GlobalContext);
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    const unsub = onSnapshot(doc(db, "users", user?.uid), (doc) => {
+      setAdded(doc.data()?.bookmark?.some((item) => item.id === filmData.id));
+    });
+    return () => unsub();
+  }, [filmData.id, user]);
   return (
     <>
       <Head>
@@ -38,17 +53,31 @@ const MoviePage = (props) => {
               {filmData.name}
             </h1>
 
-            <PlusCircleIcon
-              className="h-8 w-8 hover:text-red-600 cursor-pointer transition-colors"
-              onClick={() =>
-                addToList(
-                  "tv",
-                  filmData.id,
-                  filmData.name,
-                  filmData.poster_path
-                )
-              }
-            />
+            {added ? (
+              <HeartIcon
+                className="w-4 h-4 lg:h-8 lg:w-8 text-red-600 cursor-pointer transition-colors"
+                onClick={() =>
+                  addToList(
+                    "tv",
+                    filmData.id,
+                    filmData.name,
+                    filmData.poster_path || ""
+                  )
+                }
+              />
+            ) : (
+              <HeartIcon
+                className="w-4 h-4 lg:h-8 lg:w-8 text-white hover:text-red-600 cursor-pointer transition-colors"
+                onClick={() =>
+                  addToList(
+                    "tv",
+                    filmData.id,
+                    filmData.name,
+                    filmData.poster_path || ""
+                  )
+                }
+              />
+            )}
           </div>
           <div className="flex gap-2 font-sora my-4 flex-wrap">
             {filmData.genres.map((item) => {
@@ -57,7 +86,7 @@ const MoviePage = (props) => {
                   href={`/genre/${router.query.mediaType}/${item.id}?page=1`}
                   key={item.id}
                 >
-                  <div className="text-xs md:text-base lg:text-base cursor-pointer transition hover:text-red-600 hover:border-red-600 font-bold text-sm border-white border-2 py-1 px-2 md:py-2 md:px-4 lg:py-2 lg:px-4 rounded-3xl text-center whitespace-nowrap">
+                  <div className="md:text-base lg:text-base cursor-pointer transition hover:text-red-600 hover:border-red-600 font-bold text-sm border-white border-2 py-1 px-2 md:py-2 md:px-4 lg:py-2 lg:px-4 rounded-3xl text-center whitespace-nowrap">
                     {item.name}
                   </div>
                 </Link>
@@ -69,7 +98,7 @@ const MoviePage = (props) => {
               ? filmData.overview.slice(0, 300) + "..."
               : filmData.overview}
           </p>
-          <p className="hidden lg:block md:block font-sora max-w-xs max-w-2xl max-w-2xl my-2">
+          <p className="hidden lg:block md:block font-sora max-w-xs lg:max-w-2xl my-2">
             {filmData.overview.length > 900
               ? filmData.overview.slice(0, 900) + "..."
               : filmData.overview}
@@ -78,14 +107,14 @@ const MoviePage = (props) => {
             <StarIcon className="h-6 text-red-600 border border-red-600 rounded-full p-1" />
             <p>
               <span className="font-bold text-xs md:text-3xl lg:text-3xl text-red-600 mt-2">
-                {filmData.vote_average}
+                {filmData.vote_average.toFixed(1)}
               </span>
               <sub>/ 10</sub>
             </p>
             <span>({filmData.vote_count} votes)</span>
           </div>
           <Link href={`${router.asPath}/watch`}>
-            <div className="md:hidden lg:hidden bg-red-600 inline-block rounded-full text-xs font-bold w-24 h-8 flex items-center justify-center gap-x-1 my-4">
+            <div className="md:hidden lg:hidden bg-red-600 rounded-full text-xs font-bold w-24 h-8 flex items-center justify-center gap-x-1 my-4">
               <PlayIcon className="w-4 h-4" />
               <span>Play now</span>
             </div>

@@ -8,16 +8,14 @@ import {
 } from "firebase/auth";
 import {
   doc,
-  setDoc,
   addDoc,
   updateDoc,
   getDoc,
   arrayUnion,
   collection,
   arrayRemove,
-  query,
-  getDocs,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 export const getHomePage = async () => {
   const routes = {
@@ -121,7 +119,7 @@ export const signUp = async (e, formValue, router) => {
 
     router.push("/");
   } catch (error) {
-    alert(error);
+    toast.error(error);
   }
 };
 
@@ -129,55 +127,41 @@ export const logout = async () => {
   try {
     await signOut(auth);
   } catch (error) {
-    alert(error);
+    toast.error(error);
   }
 };
 
 export const addToList = async (media_type, id, name, poster) => {
   if (!auth.currentUser) {
-    alert("Login to add");
+    toast.error("Login to add to favorite");
     return;
   }
-  try {
-    const collection = await getDoc(doc(db, "watchlist", auth.currentUser.uid));
 
-    if (!collection.exists()) {
-      await setDoc(doc(db, "watchlist", auth.currentUser.uid), {
-        watchlist: [
-          {
-            media_type,
-            id,
-            filmID: `${media_type}${id}`,
-            createdAt: new Date().toISOString(),
-            filmName: name,
-            poster_path: poster,
-          },
-        ],
-        uid: auth.currentUser.uid,
-      });
-    } else {
-      if (
-        collection
-          .data()
-          .watchlist.some((item) => item.filmID === `${media_type}${id}`)
-      ) {
-        alert("Already added");
-        return;
-      }
-      await updateDoc(doc(db, "watchlist", auth.currentUser.uid), {
-        watchlist: arrayUnion({
+  try {
+    const collection = await getDoc(doc(db, "users", auth.currentUser.uid));
+    if (collection.data()?.bookmark?.some((item) => item.id === id)) {
+      await updateDoc(doc(db, "users", auth.currentUser.uid), {
+        bookmark: arrayRemove({
           media_type,
           id,
-          filmID: `${media_type}${id}`,
-          createdAt: new Date().toISOString(),
-          filmName: name,
+          name,
           poster_path: poster,
         }),
       });
+      toast.success("Removed");
+    } else {
+      await updateDoc(doc(db, "users", auth.currentUser.uid), {
+        bookmark: arrayUnion({
+          media_type,
+          id,
+          name,
+          poster_path: poster,
+        }),
+      });
+      toast.success("Added");
     }
-    alert("Added");
   } catch (error) {
-    alert(error);
+    toast.error("Error");
   }
 };
 

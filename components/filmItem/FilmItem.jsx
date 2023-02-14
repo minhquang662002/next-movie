@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { XCircleIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
-import { removeAddedItems } from "../../utils/api";
+import { addToList, removeAddedItems } from "../../utils/api";
 
 const FilmItem = ({ item, mediaType }) => {
   const [loaded, setLoaded] = useState(false);
@@ -28,8 +28,15 @@ const FilmItem = ({ item, mediaType }) => {
         </Link>
         {router.asPath.includes("watchlist") && (
           <XCircleIcon
-            className="w-6 h-6 absolute top-1 right-6 hover:text-red-600"
-            onClick={() => removeAddedItems(item)}
+            className="w-6 h-6 absolute top-0 right-2 hover:text-red-600"
+            onClick={() =>
+              addToList(
+                item.media_type,
+                item.id,
+                item.name || item.title,
+                item.poster_path
+              )
+            }
           />
         )}
       </div>

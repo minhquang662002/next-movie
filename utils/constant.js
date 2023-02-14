@@ -36,7 +36,7 @@ export const genreList = [
 
 export const getGenreName = (list) => {
   const nameList = list.reduce((total, cur) => {
-    total.push(...movieGenres.filter((item) => item.id == cur));
+    total.push(genreList.filter((item) => item.id == cur)[0]);
     return total;
   }, []);
   return nameList;

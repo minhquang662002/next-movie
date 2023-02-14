@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Carousel from "../components/carousel/Carousel";
+import Carousel from "../components/Carousel";
 import Section from "../components/section/Section";
 import TrendingSection from "../components/trending/TrendingSection";
 import { getHomePage } from "../utils/api";

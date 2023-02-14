@@ -1,13 +1,16 @@
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
-
+import { ToastContainer } from "react-toastify";
 const Layout = ({ children }) => {
   return (
-    <div className="bg-black min-h-screen text-white flex flex-col">
-      <Navbar />
-      <div className="flex-grow">{children}</div>
-      <Footer />
-    </div>
+    <>
+      <div className="bg-black min-h-screen text-white flex flex-col">
+        <ToastContainer />
+        <Navbar />
+        <div className="flex-grow">{children}</div>
+        <Footer />
+      </div>
+    </>
   );
 };
 
